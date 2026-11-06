@@ -1,0 +1,55 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "p2_slicer_decision",
+  "position": {
+    "x": 640,
+    "y": 10,
+    "z": 10000,
+    "height": 60,
+    "width": 200,
+    "tabOrder": 10000
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "decision_log"
+                    }
+                  },
+                  "Property": "decision_id"
+                }
+              },
+              "queryRef": "decision_log.decision_id",
+              "nativeQueryRef": "決策編號",
+              "active": true,
+              "displayName": "決策編號"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Dropdown'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

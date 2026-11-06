@@ -1,0 +1,139 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "p3_waterfall",
+  "position": {
+    "x": 20,
+    "y": 245,
+    "z": 24000,
+    "height": 340,
+    "width": 820,
+    "tabOrder": 24000
+  },
+  "visual": {
+    "visualType": "waterfallChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "esg_waterfall_daily"
+                    }
+                  },
+                  "Property": "component"
+                }
+              },
+              "queryRef": "esg_waterfall_daily.component",
+              "nativeQueryRef": "項目",
+              "active": true,
+              "displayName": "項目"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "esg_waterfall_daily"
+                        }
+                      },
+                      "Property": "ntd"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(esg_waterfall_daily.ntd)",
+              "nativeQueryRef": "NTD",
+              "displayName": "NTD"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "esg_waterfall_daily"
+                  }
+                },
+                "Property": "component"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'ESG 貢獻瀑布圖（NTD）'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'最後總計＝淨 ESV，應等於 decision_log.esv_ntd 合計'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

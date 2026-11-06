@@ -1,0 +1,55 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "p2_slicer_mode",
+  "position": {
+    "x": 1060,
+    "y": 10,
+    "z": 12000,
+    "height": 60,
+    "width": 200,
+    "tabOrder": 12000
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "decision_log"
+                    }
+                  },
+                  "Property": "approval_mode"
+                }
+              },
+              "queryRef": "decision_log.approval_mode",
+              "nativeQueryRef": "確認模式",
+              "active": true,
+              "displayName": "確認模式"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Dropdown'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

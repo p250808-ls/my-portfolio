@@ -1,0 +1,111 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "p3_bar_budget",
+  "position": {
+    "x": 295,
+    "y": 80,
+    "z": 21000,
+    "width": 620,
+    "height": 150,
+    "tabOrder": 21000
+  },
+  "visual": {
+    "visualType": "hundredPercentStackedBarChart",
+    "query": {
+      "queryState": {
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "carbon_budget_daily"
+                    }
+                  },
+                  "Property": "累計Scope2_kg"
+                }
+              },
+              "queryRef": "carbon_budget_daily.累計Scope2_kg",
+              "nativeQueryRef": "已排放 kg",
+              "displayName": "已排放 kg"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "carbon_budget_daily"
+                    }
+                  },
+                  "Property": "最新碳預算剩餘_kg"
+                }
+              },
+              "queryRef": "carbon_budget_daily.最新碳預算剩餘_kg",
+              "nativeQueryRef": "剩餘預算 kg",
+              "displayName": "剩餘預算 kg"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "legend": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Top'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'月碳預算消耗（7 天迷你月）'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

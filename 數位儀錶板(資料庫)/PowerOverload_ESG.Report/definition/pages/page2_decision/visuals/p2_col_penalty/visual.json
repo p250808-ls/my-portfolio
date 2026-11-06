@@ -1,0 +1,139 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "p2_col_penalty",
+  "position": {
+    "x": 660,
+    "y": 250,
+    "z": 16000,
+    "height": 160,
+    "width": 600,
+    "tabOrder": 16000
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "interval_settlement"
+                    }
+                  },
+                  "Property": "settle_day"
+                }
+              },
+              "queryRef": "interval_settlement.settle_day",
+              "nativeQueryRef": "日期",
+              "active": true,
+              "displayName": "日期"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "interval_settlement"
+                        }
+                      },
+                      "Property": "avoided_penalty_ntd"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(interval_settlement.avoided_penalty_ntd)",
+              "nativeQueryRef": "避免罰款",
+              "displayName": "避免罰款"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "interval_settlement"
+                        }
+                      },
+                      "Property": "penalty_ntd"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(interval_settlement.penalty_ntd)",
+              "nativeQueryRef": "實際罰款",
+              "displayName": "實際罰款"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "interval_settlement"
+                  }
+                },
+                "Property": "settle_day"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "categoryAxis": [
+        {
+          "properties": {
+            "axisType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Categorical'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'每日避免罰款 vs 實際罰款'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,190 @@
+table decision_log
+	lineageTag: 9c86e331-5c14-4804-8e7c-1a7806d149c4
+
+	measure 鎖定觸發次數 = COUNTROWS ( FILTER ( decision_log, LEN ( decision_log[locked_loads] ) > 2 ) ) + 0
+		formatString: 0
+		displayFolder: 頁面3
+		lineageTag: c221b93a-1009-453a-9e4e-c9be0ef7457b
+
+	measure 鎖定違規次數 = 0
+		formatString: 0
+		displayFolder: 頁面3
+		lineageTag: fc0671ad-f192-4f0e-b710-a9ea26040b9a
+
+	measure 人工確認筆數 = CALCULATE ( COUNTROWS ( decision_log ), decision_log[approval_mode] = "manual" )
+		formatString: 0
+		displayFolder: 頁面2
+		lineageTag: 61c469dc-0434-427c-8469-fb4eb0431887
+
+	measure 色_決策列字色 = IF ( SELECTEDVALUE ( decision_log[outcome_exceeded] ) = TRUE (), "#D13438", "#252423" )
+		displayFolder: 格式色彩
+		lineageTag: 63df90e1-46ac-41b6-b7d6-ca06e9929036
+
+	column decision_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 85060165-bf74-4d4a-9d93-8009e8660d00
+		summarizeBy: none
+		sourceColumn: decision_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column ts
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn
+		lineageTag: 56b7063e-c587-4d0a-af21-b720aea61afe
+		summarizeBy: none
+		sourceColumn: ts
+
+		annotation SummarizationSetBy = Automatic
+
+	column interval_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 1b3cb813-7284-4cce-bfc0-f80507d35efe
+		summarizeBy: none
+		sourceColumn: interval_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column edf_trigger
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 735e4ffe-0173-44de-aa26-93fd01d2714d
+		summarizeBy: none
+		sourceColumn: edf_trigger
+
+		annotation SummarizationSetBy = Automatic
+
+	column tier
+		dataType: string
+		lineageTag: 92ace4ff-41ef-46ca-9742-1b528489fc8e
+		summarizeBy: none
+		sourceColumn: tier
+
+		annotation SummarizationSetBy = Automatic
+
+	column locked_loads
+		dataType: string
+		lineageTag: d8c18c48-41e5-4a76-8c24-8ca78356a7fd
+		summarizeBy: none
+		sourceColumn: locked_loads
+
+		annotation SummarizationSetBy = Automatic
+
+	column chosen_plan
+		dataType: string
+		lineageTag: 7275dbe8-2f30-4fb9-b802-7886660e22b5
+		summarizeBy: none
+		sourceColumn: chosen_plan
+
+		annotation SummarizationSetBy = Automatic
+
+	column esv_ntd
+		dataType: double
+		formatString: #,0
+		lineageTag: 3686ee69-f287-46b8-b3ec-dc8320d67852
+		summarizeBy: sum
+		sourceColumn: esv_ntd
+
+		annotation SummarizationSetBy = Automatic
+
+	column shed_kw
+		dataType: double
+		formatString: #,0
+		lineageTag: f7ef894c-759c-4eb8-b022-9bc58f45b4a5
+		summarizeBy: sum
+		sourceColumn: shed_kw
+
+		annotation SummarizationSetBy = Automatic
+
+	column delta_carbon_kg
+		dataType: double
+		formatString: #,0.0
+		lineageTag: f277183f-4b2e-422e-9bbc-09543b5f571a
+		summarizeBy: sum
+		sourceColumn: delta_carbon_kg
+
+		annotation SummarizationSetBy = Automatic
+
+	column approval_mode
+		dataType: string
+		lineageTag: 07f86f43-e3d0-4e9e-ae1b-f556b8b28e4c
+		summarizeBy: none
+		sourceColumn: approval_mode
+
+		annotation SummarizationSetBy = Automatic
+
+	column approval_delay_s
+		dataType: int64
+		formatString: 0
+		lineageTag: 5eb2ce3e-bc76-49d2-8646-99b6ea8c99c0
+		summarizeBy: none
+		sourceColumn: approval_delay_s
+
+		annotation SummarizationSetBy = Automatic
+
+	column approval_delay_bin
+		dataType: int64
+		formatString: 0
+		lineageTag: 5ff246f8-3648-4f68-967e-c990533f6a35
+		summarizeBy: none
+		sourceColumn: approval_delay_bin
+
+		annotation SummarizationSetBy = Automatic
+
+	column outcome_exceeded
+		dataType: boolean
+		lineageTag: fd8a306d-e5a6-4499-aff6-f4a3d4df55cb
+		summarizeBy: none
+		sourceColumn: outcome_exceeded
+
+		annotation SummarizationSetBy = Automatic
+
+	column penalty_avoided_ntd
+		dataType: double
+		formatString: #,0
+		lineageTag: b1ef144c-c979-4e69-a36a-1c0959d819b7
+		summarizeBy: sum
+		sourceColumn: penalty_avoided_ntd
+
+		annotation SummarizationSetBy = Automatic
+
+	column oc_production_ntd
+		dataType: double
+		formatString: #,0
+		lineageTag: b1aba544-d271-41ec-8b0e-6fbcd4f30630
+		summarizeBy: sum
+		sourceColumn: oc_production_ntd
+
+		annotation SummarizationSetBy = Automatic
+
+	column carbon_cost_ntd
+		dataType: double
+		formatString: #,0
+		lineageTag: f4bf7aa4-7b57-4d88-b9ea-bcc20252b15d
+		summarizeBy: sum
+		sourceColumn: carbon_cost_ntd
+
+		annotation SummarizationSetBy = Automatic
+
+	column r_safety_ntd
+		dataType: double
+		formatString: #,0
+		lineageTag: daf5dd6a-6987-41b5-aa56-d9174426c390
+		summarizeBy: sum
+		sourceColumn: r_safety_ntd
+
+		annotation SummarizationSetBy = Automatic
+
+	partition decision_log = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database(PG_Server, PG_Database),
+				    Result = Value.NativeQuery(Source, "SELECT decision_id, (ts AT TIME ZONE 'Asia/Taipei') AS ts, interval_id,        edf_trigger::float8 AS edf_trigger, tier,        COALESCE(locked_loads::text, '{}') AS locked_loads,        chosen_plan, esv_ntd::float8 AS esv_ntd, shed_kw::float8 AS shed_kw,        delta_carbon_kg::float8 AS delta_carbon_kg, approval_mode, approval_delay_s::int AS approval_delay_s,        ((approval_delay_s::int / 10) * 10)::int AS approval_delay_bin,        outcome_exceeded,        penalty_avoided_ntd::float8 AS penalty_avoided_ntd, oc_production_ntd::float8 AS oc_production_ntd,        carbon_cost_ntd::float8 AS carbon_cost_ntd, r_safety_ntd::float8 AS r_safety_ntd FROM public.decision_log", null, [EnableFolding = true])
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
+

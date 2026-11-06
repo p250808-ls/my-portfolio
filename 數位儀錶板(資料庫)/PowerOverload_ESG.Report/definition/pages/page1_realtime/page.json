@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "page1_realtime",
+  "displayName": "1 即時超約戰情",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280
+}

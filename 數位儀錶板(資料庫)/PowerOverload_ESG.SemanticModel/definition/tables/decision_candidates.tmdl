@@ -1,0 +1,109 @@
+table decision_candidates
+	lineageTag: c4d16a65-2cfb-4841-b644-0298ced4b3e0
+
+	measure 方案名稱 = SELECTEDVALUE ( decision_candidates[plan_name] )
+		displayFolder: 頁面2
+		lineageTag: 6a1bc973-6adb-490b-933f-2ddf5ab69463
+
+	measure 色_候選點 = SWITCH ( TRUE (), SELECTEDVALUE ( decision_candidates[is_locked] ) = TRUE (), "#B3B3B3", SELECTEDVALUE ( decision_candidates[is_chosen] ) = TRUE (), "#E8710A", "#2B7BB9" )
+		displayFolder: 格式色彩
+		lineageTag: 3a887896-df9a-401b-9cc4-730643e98cd0
+
+	column candidate_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 94ee91f5-fe12-4391-b727-92bdb12a1a68
+		summarizeBy: none
+		sourceColumn: candidate_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column decision_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 12db76bf-b729-417c-a6ac-3f674da7e311
+		summarizeBy: none
+		sourceColumn: decision_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column plan_name
+		dataType: string
+		lineageTag: 4b05e580-f9de-4152-b283-f7029c75b1db
+		summarizeBy: none
+		sourceColumn: plan_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column shed_kw
+		dataType: double
+		formatString: #,0
+		lineageTag: 4af7bad3-bbfa-4342-a304-b0c8cbd58756
+		summarizeBy: sum
+		sourceColumn: shed_kw
+
+		annotation SummarizationSetBy = Automatic
+
+	column edf_after
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 478d842f-0aa5-4e94-9f99-5669a00d48e1
+		summarizeBy: none
+		sourceColumn: edf_after
+
+		annotation SummarizationSetBy = Automatic
+
+	column cost_ntd
+		dataType: double
+		formatString: #,0
+		lineageTag: 27aa835a-1f78-49e6-acb9-e52d0713e5de
+		summarizeBy: sum
+		sourceColumn: cost_ntd
+
+		annotation SummarizationSetBy = Automatic
+
+	column delta_carbon_kg
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 7e5ad438-f30d-4209-b830-e23db4fffb0c
+		summarizeBy: sum
+		sourceColumn: delta_carbon_kg
+
+		annotation SummarizationSetBy = Automatic
+
+	column esv_ntd
+		dataType: double
+		formatString: #,0
+		lineageTag: 2df02091-76de-4cf3-adbc-a6c84ddbc3f3
+		summarizeBy: sum
+		sourceColumn: esv_ntd
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_locked
+		dataType: boolean
+		lineageTag: 985d692e-6a75-41df-8cd6-22af2a395059
+		summarizeBy: none
+		sourceColumn: is_locked
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_chosen
+		dataType: boolean
+		lineageTag: 862c2157-cbde-4c72-a473-a18adc47f506
+		summarizeBy: none
+		sourceColumn: is_chosen
+
+		annotation SummarizationSetBy = Automatic
+
+	partition decision_candidates = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database(PG_Server, PG_Database),
+				    Result = Value.NativeQuery(Source, "SELECT candidate_id, decision_id, plan_name,        shed_kw::float8 AS shed_kw, edf_after::float8 AS edf_after, cost_ntd::float8 AS cost_ntd,        delta_carbon_kg::float8 AS delta_carbon_kg, esv_ntd::float8 AS esv_ntd, is_locked, is_chosen FROM public.decision_candidates", null, [EnableFolding = true])
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,504 @@
+cultureInfo zh-TW
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "power_reading.edf": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "power_reading",
+			          "ConceptualProperty": "最新EDF"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "當下 EDF": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "power_reading.ts": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "power_reading",
+			          "ConceptualProperty": "ts"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "時間": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "時間範圍": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "power_reading.column2edf": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "power_reading",
+			          "ConceptualProperty": "近2小時EDF"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "EDF": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "power_reading.minute_in_interval": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "power_reading",
+			          "ConceptualProperty": "minute_in_interval"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "區間內第幾分鐘": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "power_reading.column": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "power_reading",
+			          "ConceptualProperty": "當前區間累積需量"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "累積平均需量 kW": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "power_reading.column1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "power_reading",
+			          "ConceptualProperty": "最新鎖定狀態"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "鎖定狀態": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "power_reading.wbgt": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "power_reading",
+			          "ConceptualProperty": "最新WBGT"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "WBGT ℃": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "power_reading.column2": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "power_reading",
+			          "ConceptualProperty": "最新製程溫度"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "製程溫度 ℃": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "power_reading.date_local": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "power_reading",
+			          "ConceptualProperty": "date_local"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "日期": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "power_reading.hour_local": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "power_reading",
+			          "ConceptualProperty": "hour_local"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "小時": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "interval_settlement.settle_day": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "interval_settlement",
+			          "ConceptualProperty": "settle_day"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "日期": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "decision_log.approval_delay_bin": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "decision_log",
+			          "ConceptualProperty": "approval_delay_bin"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "延遲（秒，每 10 秒一組）": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "decision_log.column": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "decision_log",
+			          "ConceptualProperty": "人工確認筆數"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "筆數": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "decision_log.decision_id": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "decision_log",
+			          "ConceptualProperty": "decision_id"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "決策編號": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "decision_log.approval_mode": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "decision_log",
+			          "ConceptualProperty": "approval_mode"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "確認模式": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "decision_log.tier": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "decision_log",
+			          "ConceptualProperty": "tier"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "決策分級": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "decision_candidates.candidate_id": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "decision_candidates",
+			          "ConceptualProperty": "candidate_id"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "候選編號": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "decision_candidates.column": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "decision_candidates",
+			          "ConceptualProperty": "方案名稱"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "方案": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "carbon_budget_daily.scope2_kg": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "carbon_budget_daily",
+			          "ConceptualProperty": "累計Scope2_kg"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "已排放 kg": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "carbon_budget_daily.column_kg": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "carbon_budget_daily",
+			          "ConceptualProperty": "最新碳預算剩餘_kg"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "剩餘預算 kg": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "carbon_budget_daily.day": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "carbon_budget_daily",
+			          "ConceptualProperty": "day"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "日期": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "carbon_budget_daily.column": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "carbon_budget_daily",
+			          "ConceptualProperty": "碳強度"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "碳強度 kg/kWh": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "esg_waterfall_daily.component": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "esg_waterfall_daily",
+			          "ConceptualProperty": "component"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "項目": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

@@ -1,0 +1,282 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "p2_scatter",
+  "position": {
+    "x": 20,
+    "y": 90,
+    "z": 13000,
+    "height": 320,
+    "width": 620,
+    "tabOrder": 13000
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "decision_candidates"
+                    }
+                  },
+                  "Property": "candidate_id"
+                }
+              },
+              "queryRef": "decision_candidates.candidate_id",
+              "nativeQueryRef": "候選編號",
+              "active": true,
+              "displayName": "候選編號"
+            }
+          ]
+        },
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "decision_candidates"
+                        }
+                      },
+                      "Property": "shed_kw"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(decision_candidates.shed_kw)",
+              "nativeQueryRef": "卸載 kW",
+              "displayName": "卸載 kW"
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "decision_candidates"
+                    }
+                  },
+                  "Property": "方案名稱"
+                }
+              },
+              "queryRef": "decision_candidates.方案名稱",
+              "nativeQueryRef": "方案",
+              "displayName": "方案"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "decision_candidates"
+                        }
+                      },
+                      "Property": "esv_ntd"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(decision_candidates.esv_ntd)",
+              "nativeQueryRef": "ESV NTD",
+              "displayName": "ESV NTD"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "decision_candidates"
+                        }
+                      },
+                      "Property": "cost_ntd"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(decision_candidates.cost_ntd)",
+              "nativeQueryRef": "成本 NTD",
+              "active": true,
+              "displayName": "成本 NTD"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "decision_candidates"
+                        }
+                      },
+                      "Property": "delta_carbon_kg"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(decision_candidates.delta_carbon_kg)",
+              "nativeQueryRef": "碳排變化 kg",
+              "displayName": "碳排變化 kg"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "decision_candidates"
+                        }
+                      },
+                      "Property": "色_候選點"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "y1AxisReferenceLine": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "displayName": {
+              "expr": {
+                "Literal": {
+                  "Value": "'碳排持平'"
+                }
+              }
+            },
+            "lineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#605E5C'"
+                    }
+                  }
+                }
+              }
+            },
+            "style": {
+              "expr": {
+                "Literal": {
+                  "Value": "'dashed'"
+                }
+              }
+            },
+            "dataLabelShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "1"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'方案象限圖'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'橘＝選定方案｜藍＝其他候選｜灰＝安全鎖定排除；Y=0 以上增排、以下減碳'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

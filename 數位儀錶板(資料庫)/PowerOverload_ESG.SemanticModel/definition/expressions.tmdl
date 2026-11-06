@@ -1,0 +1,10 @@
+expression PG_Server = "43.133.30.68:32740" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: ac287772-9944-4e50-ac0d-fb6b35c83644
+
+	annotation PBI_ResultType = Text
+
+expression PG_Database = "zeabur" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: a813b388-8f47-4522-a858-fac49bcfe827
+
+	annotation PBI_ResultType = Text
+

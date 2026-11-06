@@ -1,0 +1,213 @@
+table power_reading
+	lineageTag: d5590781-5596-4e07-980d-a3c12beff399
+
+	measure 最新EDF = MAXX ( TOPN ( 1, ALL ( power_reading ), power_reading[ts], DESC ), power_reading[edf] )
+		formatString: 0.0%
+		displayFolder: 頁面1
+		lineageTag: 45efa619-d79e-4821-817c-b332711ba5cd
+
+	measure 最新剩餘分鐘 = MAXX ( TOPN ( 1, ALL ( power_reading ), power_reading[ts], DESC ), power_reading[remaining_minutes] )
+		formatString: 0
+		displayFolder: 頁面1
+		lineageTag: 7f0c5565-e94f-4664-8106-f9cdf1881217
+
+	measure 最新Buffer_kW = MAXX ( TOPN ( 1, ALL ( power_reading ), power_reading[ts], DESC ), power_reading[buffer_kw] )
+		formatString: #,0
+		displayFolder: 頁面1
+		lineageTag: dfcaae7b-5a0b-4557-bd14-cbde61a71bb1
+
+	measure 最新區間ID = MAXX ( TOPN ( 1, ALL ( power_reading ), power_reading[ts], DESC ), power_reading[interval_id] )
+		formatString: 0
+		displayFolder: 頁面1
+		lineageTag: 802381c9-e6a4-4a9e-8dbd-4772671bb938
+
+	measure 最新鎖定狀態 = VAR s = MAXX ( TOPN ( 1, ALL ( power_reading ), power_reading[ts], DESC ), power_reading[locked_status_text] ) RETURN IF ( s = "", "無鎖定", s )
+		displayFolder: 頁面1
+		lineageTag: 807184bd-7819-40f1-94fb-742faf8ab40e
+
+	measure 最新WBGT = MAXX ( TOPN ( 1, ALL ( power_reading ), power_reading[ts], DESC ), power_reading[wbgt] )
+		formatString: #,0.0
+		displayFolder: 頁面1
+		lineageTag: af2419bb-3e1f-4643-a193-53f4a5f4d164
+
+	measure 最新製程溫度 = MAXX ( TOPN ( 1, ALL ( power_reading ), power_reading[ts], DESC ), power_reading[process_temp] )
+		formatString: #,0.0
+		displayFolder: 頁面1
+		lineageTag: fe10c8be-cbb7-407f-8439-aee0503b2544
+
+	measure 當前區間累積需量 = VAR _latestInterval = MAXX ( TOPN ( 1, ALL ( power_reading ), power_reading[ts], DESC ), power_reading[interval_id] ) RETURN CALCULATE ( AVERAGE ( power_reading[avg_kw_so_far] ), KEEPFILTERS ( power_reading[interval_id] = _latestInterval ) )
+		formatString: #,0
+		displayFolder: 頁面1
+		lineageTag: 4da4bbad-d876-46f7-b790-b7129a1e6148
+
+	measure 近2小時EDF = VAR t = MAXX ( ALL ( power_reading ), power_reading[ts] ) RETURN CALCULATE ( AVERAGE ( power_reading[edf] ), KEEPFILTERS ( power_reading[ts] > t - 2 / 24 ) )
+		formatString: 0.0%
+		displayFolder: 頁面1
+		lineageTag: 68af9c12-5717-472e-aaf5-644dd1243918
+
+	measure 綠電匹配率 = CALCULATE ( AVERAGE ( power_reading[renewable_pct] ), power_reading[edf] >= 0.5 )
+		formatString: 0.00
+		displayFolder: 頁面3
+		lineageTag: 657b37da-da32-422b-9ecd-6150aad6c0aa
+
+	measure 色_EDF燈號 = VAR e = [最新EDF] RETURN SWITCH ( TRUE (), e >= 0.8, "#D13438", e >= 0.5, "#F7630C", e >= 0.2, "#FFB900", "#107C10" )
+		displayFolder: 格式色彩
+		lineageTag: 76e7762f-888b-4049-84a0-378ccf5fe146
+
+	measure 色_Buffer字色 = IF ( [最新Buffer_kW] < 0, "#D13438", "#252423" )
+		displayFolder: 格式色彩
+		lineageTag: 298d070d-0e69-4a5a-a464-3e8c4760e463
+
+	measure 色_WBGT底色 = IF ( [最新WBGT] >= 28, "#F4B6B6", "#FFFFFF" )
+		displayFolder: 格式色彩
+		lineageTag: 6bda9d6a-0d29-4a85-a31c-18725b031721
+
+	measure 色_製程溫度底色 = IF ( [最新製程溫度] < 82, "#F4B6B6", "#FFFFFF" )
+		displayFolder: 格式色彩
+		lineageTag: c73d5337-2621-40d0-9afb-a5bf30d30e1f
+
+	column ts
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn
+		lineageTag: adef0e54-e86d-40f1-ab3e-a412c18c7b10
+		summarizeBy: none
+		sourceColumn: ts
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_local
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 454ff531-7865-4f0b-a510-cca73d0739b3
+		summarizeBy: none
+		sourceColumn: date_local
+
+		annotation SummarizationSetBy = Automatic
+
+	column hour_local
+		dataType: int64
+		formatString: 0
+		lineageTag: d54ce062-9fe8-4876-9ede-f2c191559e03
+		summarizeBy: none
+		sourceColumn: hour_local
+
+		annotation SummarizationSetBy = Automatic
+
+	column interval_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f4d1b705-fb46-4323-a77a-6b926a55bb27
+		summarizeBy: none
+		sourceColumn: interval_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column minute_in_interval
+		dataType: int64
+		formatString: 0
+		lineageTag: 81546110-3a74-4f7c-862e-e75991707b4b
+		summarizeBy: none
+		sourceColumn: minute_in_interval
+
+		annotation SummarizationSetBy = Automatic
+
+	column remaining_minutes
+		dataType: int64
+		formatString: 0
+		lineageTag: 1892d3df-89de-443b-b5c6-292369ccc41c
+		summarizeBy: none
+		sourceColumn: remaining_minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column load_kw
+		dataType: double
+		formatString: #,0
+		lineageTag: bece609b-e99e-4fea-8747-970584b34054
+		summarizeBy: sum
+		sourceColumn: load_kw
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_kw_so_far
+		dataType: double
+		formatString: #,0
+		lineageTag: 0afaf9a5-0cac-4eb8-baa6-acfdfe2f93c6
+		summarizeBy: sum
+		sourceColumn: avg_kw_so_far
+
+		annotation SummarizationSetBy = Automatic
+
+	column buffer_kw
+		dataType: double
+		formatString: #,0
+		lineageTag: 72d7459b-da9a-4bdb-aac3-91d183799ed3
+		summarizeBy: sum
+		sourceColumn: buffer_kw
+
+		annotation SummarizationSetBy = Automatic
+
+	column edf
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 2174ebc9-3b40-4d83-ba94-30b60e9fb842
+		summarizeBy: none
+		sourceColumn: edf
+
+		annotation SummarizationSetBy = Automatic
+
+	column grid_ef
+		dataType: double
+		formatString: 0.000
+		lineageTag: d172550f-6db3-421f-9655-b40f9c3469b8
+		summarizeBy: none
+		sourceColumn: grid_ef
+
+		annotation SummarizationSetBy = Automatic
+
+	column renewable_pct
+		dataType: double
+		formatString: 0.00
+		lineageTag: e54e552a-215d-40f1-bce1-7274033506b4
+		summarizeBy: none
+		sourceColumn: renewable_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column wbgt
+		dataType: double
+		formatString: #,0.0
+		lineageTag: f6aafaef-b0b5-4eda-a03d-d10055cdda9b
+		summarizeBy: none
+		sourceColumn: wbgt
+
+		annotation SummarizationSetBy = Automatic
+
+	column process_temp
+		dataType: double
+		formatString: #,0.0
+		lineageTag: c1a7d714-0785-4904-8bca-b0f2459b0462
+		summarizeBy: none
+		sourceColumn: process_temp
+
+		annotation SummarizationSetBy = Automatic
+
+	column locked_status_text
+		dataType: string
+		lineageTag: e39c078c-5808-4d42-8560-6770d14e92a4
+		summarizeBy: none
+		sourceColumn: locked_status_text
+
+		annotation SummarizationSetBy = Automatic
+
+	partition power_reading = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database(PG_Server, PG_Database),
+				    Result = Value.NativeQuery(Source, "SELECT (ts AT TIME ZONE 'Asia/Taipei') AS ts,        (ts AT TIME ZONE 'Asia/Taipei')::date AS date_local,        EXTRACT(HOUR FROM (ts AT TIME ZONE 'Asia/Taipei'))::int AS hour_local,        interval_id, minute_in_interval, remaining_minutes,        load_kw::float8 AS load_kw, avg_kw_so_far::float8 AS avg_kw_so_far, buffer_kw::float8 AS buffer_kw,        edf::float8 AS edf, grid_ef::float8 AS grid_ef, renewable_pct::float8 AS renewable_pct,        wbgt::float8 AS wbgt, process_temp::float8 AS process_temp,        COALESCE(locked_status_text, '') AS locked_status_text FROM public.power_reading", null, [EnableFolding = true])
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,50 @@
+table esg_waterfall_daily
+	lineageTag: 416d8ece-43cb-436a-9788-d74fb00361df
+
+	column day
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: a3c4c7b7-a78d-4348-a6eb-bba2d61d6f45
+		summarizeBy: none
+		sourceColumn: day
+
+		annotation SummarizationSetBy = Automatic
+
+	column component
+		dataType: string
+		lineageTag: 8a6c2b64-18c7-48fa-94f6-a1d4774f09fe
+		summarizeBy: none
+		sourceColumn: component
+		sortByColumn: sort_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column ntd
+		dataType: double
+		formatString: #,0
+		lineageTag: 6bef3012-b5e2-4819-a38d-ba8337eefcf5
+		summarizeBy: sum
+		sourceColumn: ntd
+
+		annotation SummarizationSetBy = Automatic
+
+	column sort_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 18cab423-35e4-4482-9d34-4e254db33c82
+		summarizeBy: none
+		sourceColumn: sort_order
+
+		annotation SummarizationSetBy = Automatic
+
+	partition esg_waterfall_daily = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database(PG_Server, PG_Database),
+				    Result = Value.NativeQuery(Source, "SELECT day, component, ntd::float8 AS ntd, sort_order FROM public.esg_waterfall_daily", null, [EnableFolding = true])
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
+

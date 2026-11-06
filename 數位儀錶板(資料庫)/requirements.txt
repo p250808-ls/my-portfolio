@@ -1,0 +1,6 @@
+numpy>=1.26
+scipy>=1.11
+pandas>=2.1
+psycopg2-binary>=2.9
+python-dotenv>=1.0
+tzdata>=2024.1

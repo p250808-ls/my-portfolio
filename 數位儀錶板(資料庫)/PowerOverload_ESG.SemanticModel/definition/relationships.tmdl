@@ -1,0 +1,20 @@
+relationship 92d10319-ef9a-4062-9c45-e8a2f9e3ea96
+	fromColumn: power_reading.interval_id
+	toColumn: interval_settlement.interval_id
+
+relationship 0ad89158-decb-487a-b66f-5486e0cebff5
+	fromColumn: decision_log.interval_id
+	toColumn: interval_settlement.interval_id
+
+relationship 9e935128-65b3-404e-853e-f43a91f627db
+	fromColumn: decision_candidates.decision_id
+	toColumn: decision_log.decision_id
+
+relationship d2093df5-2224-45f0-a895-186948e23fd4
+	fromColumn: esg_waterfall_daily.day
+	toColumn: carbon_budget_daily.day
+
+relationship 2070f5c4-e252-4450-b3b7-eb4787f54653
+	fromColumn: interval_settlement.settle_day
+	toColumn: carbon_budget_daily.day
+

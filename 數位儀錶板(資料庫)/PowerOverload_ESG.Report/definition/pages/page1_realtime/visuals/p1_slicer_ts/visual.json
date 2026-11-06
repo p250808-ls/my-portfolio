@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "p1_slicer_ts",
+  "position": {
+    "x": 900,
+    "y": 10,
+    "z": 2000,
+    "height": 60,
+    "width": 360,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "power_reading"
+                    }
+                  },
+                  "Property": "ts"
+                }
+              },
+              "queryRef": "power_reading.ts",
+              "nativeQueryRef": "時間範圍",
+              "active": true,
+              "displayName": "時間範圍"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

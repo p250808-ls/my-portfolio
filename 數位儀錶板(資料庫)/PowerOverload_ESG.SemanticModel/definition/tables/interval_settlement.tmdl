@@ -1,0 +1,110 @@
+table interval_settlement
+	lineageTag: faa12255-a244-44da-814c-4cddb23d8943
+
+	measure 避免罰款累計 = SUM ( interval_settlement[avoided_penalty_ntd] )
+		formatString: #,0
+		displayFolder: 頁面2
+		lineageTag: f15d4850-283b-4245-8057-107144978a5f
+
+	measure 實際罰款累計 = SUM ( interval_settlement[penalty_ntd] )
+		formatString: #,0
+		displayFolder: 頁面2
+		lineageTag: 1bef3849-030b-489c-866f-1eb388495615
+
+	measure 預警次數 = CALCULATE ( COUNTROWS ( interval_settlement ), interval_settlement[edf_at_10] >= 0.5 )
+		formatString: 0
+		displayFolder: 頁面2
+		lineageTag: 11596ae4-087e-4a63-9e15-bc956d7baa8f
+
+	measure 預警命中數 = CALCULATE ( COUNTROWS ( interval_settlement ), interval_settlement[edf_at_10] >= 0.5, interval_settlement[exceeded] = TRUE () )
+		formatString: 0
+		displayFolder: 頁面2
+		lineageTag: a25c0c31-fad9-4416-acf1-bfbf3b0b6b8a
+
+	measure 預警命中率 = DIVIDE ( [預警命中數], [預警次數] )
+		formatString: 0.0%
+		displayFolder: 頁面2
+		lineageTag: c2436301-a291-4b56-8175-91474b8d128f
+
+	column interval_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 01a3dbee-b0e7-40dd-9030-817ad4782bfc
+		summarizeBy: none
+		sourceColumn: interval_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column interval_start
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn
+		lineageTag: 730f2558-8778-44ed-aca6-e1b3210e75c3
+		summarizeBy: none
+		sourceColumn: interval_start
+
+		annotation SummarizationSetBy = Automatic
+
+	column settle_day
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 59a7af64-38ff-4709-8995-46c4cad7425a
+		summarizeBy: none
+		sourceColumn: settle_day
+
+		annotation SummarizationSetBy = Automatic
+
+	column exceeded
+		dataType: boolean
+		lineageTag: 6ffdc07d-af76-4632-8f82-fd820b8026fe
+		summarizeBy: none
+		sourceColumn: exceeded
+
+		annotation SummarizationSetBy = Automatic
+
+	column penalty_ntd
+		dataType: double
+		formatString: #,0
+		lineageTag: 0747e706-516e-4b0a-9e43-47dfc8b00685
+		summarizeBy: sum
+		sourceColumn: penalty_ntd
+
+		annotation SummarizationSetBy = Automatic
+
+	column edf_at_5
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 27a94af0-d049-4d3f-924e-b93250702c68
+		summarizeBy: none
+		sourceColumn: edf_at_5
+
+		annotation SummarizationSetBy = Automatic
+
+	column edf_at_10
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 7d525caa-9da8-4791-a0ae-d8edeaecdc64
+		summarizeBy: none
+		sourceColumn: edf_at_10
+
+		annotation SummarizationSetBy = Automatic
+
+	column avoided_penalty_ntd
+		dataType: double
+		formatString: #,0
+		lineageTag: 038d8349-a268-462b-b140-0f91217eebdf
+		summarizeBy: sum
+		sourceColumn: avoided_penalty_ntd
+
+		annotation SummarizationSetBy = Automatic
+
+	partition interval_settlement = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database(PG_Server, PG_Database),
+				    Result = Value.NativeQuery(Source, "SELECT interval_id,        (interval_start AT TIME ZONE 'Asia/Taipei') AS interval_start,        (interval_start AT TIME ZONE 'Asia/Taipei')::date AS settle_day,        exceeded, penalty_ntd::float8 AS penalty_ntd,        edf_at_5::float8 AS edf_at_5, edf_at_10::float8 AS edf_at_10,        avoided_penalty_ntd::float8 AS avoided_penalty_ntd FROM public.interval_settlement", null, [EnableFolding = true])
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
+

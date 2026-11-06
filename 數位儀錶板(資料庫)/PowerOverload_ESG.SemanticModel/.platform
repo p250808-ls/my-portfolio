@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "PowerOverload_ESG"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ed991999-2e0e-4f05-a3d7-5cc8074059ef"
+  }
+}

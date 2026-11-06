@@ -1,0 +1,97 @@
+table carbon_budget_daily
+	lineageTag: 46326605-60c7-4710-a213-ffba3ca45349
+
+	measure 最新碳EDF = MAXX ( TOPN ( 1, ALL ( carbon_budget_daily ), carbon_budget_daily[day], DESC ), carbon_budget_daily[carbon_edf] )
+		formatString: 0.0%
+		displayFolder: 頁面3
+		lineageTag: c6e613a1-2631-4e0f-b603-f7188a7e99ad
+
+	measure 最新碳預算剩餘_kg = MAXX ( TOPN ( 1, ALL ( carbon_budget_daily ), carbon_budget_daily[day], DESC ), carbon_budget_daily[budget_remaining_kg] )
+		formatString: #,0
+		displayFolder: 頁面3
+		lineageTag: cac5c2ac-8784-4e00-9aef-7f65b9a8b264
+
+	measure 累計Scope2_kg = SUM ( carbon_budget_daily[scope2_kg] )
+		formatString: #,0
+		displayFolder: 頁面3
+		lineageTag: ea8d6aa6-3073-4373-8a4e-a75c6e237af7
+
+	measure 累計避免碳排_kg = SUM ( carbon_budget_daily[avoided_carbon_kg] )
+		formatString: #,0.0
+		displayFolder: 頁面3
+		lineageTag: dec170d8-6f56-4bcf-b591-045777b733fc
+
+	measure 碳強度 = DIVIDE ( SUM ( carbon_budget_daily[scope2_kg] ), SUM ( carbon_budget_daily[kwh_total] ) )
+		formatString: 0.000
+		displayFolder: 頁面3
+		lineageTag: 26af1181-0b41-4bfa-8160-a51b6668a012
+
+	measure 色_碳EDF燈號 = VAR e = [最新碳EDF] RETURN SWITCH ( TRUE (), e >= 0.8, "#D13438", e >= 0.5, "#F7630C", e >= 0.2, "#FFB900", "#107C10" )
+		displayFolder: 格式色彩
+		lineageTag: 0a6d140e-45a6-4c8e-bea4-2535b6cf0f77
+
+	column day
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: de98abdf-d7bd-464b-b858-3e6495870061
+		summarizeBy: none
+		sourceColumn: day
+
+		annotation SummarizationSetBy = Automatic
+
+	column kwh_total
+		dataType: double
+		formatString: #,0
+		lineageTag: 419afde9-c357-4cc8-95c9-fd14007a6353
+		summarizeBy: sum
+		sourceColumn: kwh_total
+
+		annotation SummarizationSetBy = Automatic
+
+	column scope2_kg
+		dataType: double
+		formatString: #,0
+		lineageTag: 1dda0a4e-6a79-4151-a20f-0bd3fc541377
+		summarizeBy: sum
+		sourceColumn: scope2_kg
+
+		annotation SummarizationSetBy = Automatic
+
+	column budget_remaining_kg
+		dataType: double
+		formatString: #,0
+		lineageTag: 5ba038b0-ebec-4e0e-8f18-f545e974b332
+		summarizeBy: none
+		sourceColumn: budget_remaining_kg
+
+		annotation SummarizationSetBy = Automatic
+
+	column carbon_edf
+		dataType: double
+		formatString: 0.0%
+		lineageTag: c83ccc50-9530-427f-ab7b-a87d2b98054f
+		summarizeBy: none
+		sourceColumn: carbon_edf
+
+		annotation SummarizationSetBy = Automatic
+
+	column avoided_carbon_kg
+		dataType: double
+		formatString: #,0.0
+		lineageTag: 84caf9d1-20e1-4830-a525-30e79aa0a995
+		summarizeBy: sum
+		sourceColumn: avoided_carbon_kg
+
+		annotation SummarizationSetBy = Automatic
+
+	partition carbon_budget_daily = m
+		mode: directQuery
+		source =
+				let
+				    Source = PostgreSQL.Database(PG_Server, PG_Database),
+				    Result = Value.NativeQuery(Source, "SELECT day, kwh_total::float8 AS kwh_total, scope2_kg::float8 AS scope2_kg,        budget_remaining_kg::float8 AS budget_remaining_kg, carbon_edf::float8 AS carbon_edf,        avoided_carbon_kg::float8 AS avoided_carbon_kg FROM public.carbon_budget_daily", null, [EnableFolding = true])
+				in
+				    Result
+
+	annotation PBI_ResultType = Table
+

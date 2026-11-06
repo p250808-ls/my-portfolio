@@ -1,0 +1,138 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "p3_combo",
+  "position": {
+    "x": 20,
+    "y": 835,
+    "z": 29000,
+    "height": 150,
+    "width": 1240,
+    "tabOrder": 29000
+  },
+  "visual": {
+    "visualType": "lineClusteredColumnComboChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "carbon_budget_daily"
+                    }
+                  },
+                  "Property": "day"
+                }
+              },
+              "queryRef": "carbon_budget_daily.day",
+              "nativeQueryRef": "日期",
+              "active": true,
+              "displayName": "日期"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "interval_settlement"
+                        }
+                      },
+                      "Property": "edf_at_10"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Avg(interval_settlement.edf_at_10)",
+              "nativeQueryRef": "第10分鐘 EDF（平均）",
+              "displayName": "第10分鐘 EDF（平均）"
+            }
+          ]
+        },
+        "Y2": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "carbon_budget_daily"
+                    }
+                  },
+                  "Property": "碳強度"
+                }
+              },
+              "queryRef": "carbon_budget_daily.碳強度",
+              "nativeQueryRef": "碳強度 kg/kWh",
+              "displayName": "碳強度 kg/kWh"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "carbon_budget_daily"
+                  }
+                },
+                "Property": "day"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "categoryAxis": [
+        {
+          "properties": {
+            "axisType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Categorical'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'EDF vs 碳強度'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
