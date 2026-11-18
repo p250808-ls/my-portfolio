@@ -5,7 +5,6 @@
 | 專案 | 類型 | 一句話說明 | 狀態 |
 | --- | --- | --- | --- |
 | **[數位儀表板-mysql](數位儀表板-mysql/)** | 資料分析 × 數位儀表板 | 用 KMV 信用風險模型預警工廠尖峰用電超約，並以 ESG 價值挑選卸載方案，Power BI 呈現 | ✅ 線上運作中（Railway） |
-| [數位儀錶板(資料庫)](<數位儀錶板(資料庫)/>) | 資料分析 × 數位儀表板 | 上一個專案的舊版（PostgreSQL + Zeabur） | ⚠️ 舊版，Zeabur 停止服務後無法連線 |
 | [PMP專案管理實務](PMP專案管理實務/) | 專案管理 | 「長照資訊大管家」商業計畫書與簡報 | 📄 文件 |
 
 ---
@@ -28,11 +27,7 @@
 
 **使用技術**：Python（numpy、scipy、pandas）、MySQL、Power BI（Power Query、DAX、PBIP 專案格式）、Docker、Railway
 
----
-
-## 數位儀錶板(資料庫)（舊版）
-
-同一個 KMV × ESG 系統的第一版，資料庫用 PostgreSQL、部署在 Zeabur。Zeabur 已公告 2026/12/31 全面停止服務，這個版本之後會連不上資料庫，**請改看 [數位儀表板-mysql](數位儀表板-mysql/)**。保留在這裡作為版本紀錄，內含當時的 Power BI 報表（`PowerOverload_ESG.pbip`）、畫面截圖 PDF 與架構圖。
+> 第一版使用 PostgreSQL + Zeabur，Zeabur 停止服務後已改為現在的 Railway + MySQL 版；舊版已移至私人 repo 保存。
 
 ---
 
@@ -53,6 +48,5 @@
 ```
 my-portfolio/
 ├── 數位儀表板-mysql/        ← KMV × ESG 系統（現行版：Railway + MySQL）
-├── 數位儀錶板(資料庫)/      ← 同系統舊版（Zeabur + PostgreSQL）
 └── PMP專案管理實務/          ← 長照資訊大管家 商業計畫書與簡報
 ```
