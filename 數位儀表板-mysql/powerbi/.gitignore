@@ -1,0 +1,4 @@
+# Power BI Desktop 本機快取與設定
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+*.pbix

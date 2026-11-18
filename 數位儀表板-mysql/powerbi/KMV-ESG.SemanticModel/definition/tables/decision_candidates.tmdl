@@ -1,0 +1,92 @@
+table decision_candidates
+	lineageTag: 9d4b66b3-efbb-518f-b83d-acabf0b5258b
+
+	column candidate_id
+		dataType: int64
+		lineageTag: e2f56b24-8f7c-5ff8-a786-e7e2c03f0b06
+		summarizeBy: none
+		sourceColumn: candidate_id
+
+	column decision_id
+		dataType: int64
+		lineageTag: f3563a65-51c7-5255-8222-64677467e4bf
+		summarizeBy: none
+		sourceColumn: decision_id
+
+	column plan_name
+		dataType: string
+		lineageTag: 9c14f277-5953-50ba-84e8-a7bad86ad5aa
+		summarizeBy: none
+		sourceColumn: plan_name
+
+	column shed_kw
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 634dc467-bda3-5e28-ade7-f19469be71d7
+		summarizeBy: sum
+		sourceColumn: shed_kw
+
+	column edf_after
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 0dc27928-0d38-5088-9d34-08dc04c14a11
+		summarizeBy: sum
+		sourceColumn: edf_after
+
+	column penalty_avoided_ntd
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 87354ee2-0de8-5aeb-ae28-97a13ded8857
+		summarizeBy: sum
+		sourceColumn: penalty_avoided_ntd
+
+	column cost_ntd
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 47268159-155e-57e7-8e4c-41f1d1cc65f2
+		summarizeBy: sum
+		sourceColumn: cost_ntd
+
+	column delta_carbon_kg
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 121eefc1-592c-560a-810d-643e2402ffe5
+		summarizeBy: sum
+		sourceColumn: delta_carbon_kg
+
+	column esv_ntd
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 473811f7-abcf-5aec-acfb-b2c6648b449f
+		summarizeBy: sum
+		sourceColumn: esv_ntd
+
+	column is_locked
+		dataType: boolean
+		lineageTag: ddb379bb-9543-59e5-97d3-e22e987773f3
+		summarizeBy: none
+		sourceColumn: is_locked
+
+	column is_chosen
+		dataType: boolean
+		lineageTag: c0db4e46-f610-5784-9a70-b1b02ea75501
+		summarizeBy: none
+		sourceColumn: is_chosen
+
+	column plan_status
+		dataType: string
+		lineageTag: 586e94da-343d-5f6f-bd57-3fd10d31e69d
+		summarizeBy: none
+		sourceColumn: plan_status
+
+	partition decision_candidates = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("tokaido.proxy.rlwy.net:18473", "kmv_esg", [ReturnSingleDatabase = true]),
+				    Data = Source{[Schema = "kmv_esg", Item = "decision_candidates"]}[Data],
+				    Kept = Table.SelectColumns(Data, {"candidate_id", "decision_id", "plan_name", "shed_kw", "edf_after", "penalty_avoided_ntd", "cost_ntd", "delta_carbon_kg", "esv_ntd", "is_locked", "is_chosen"}),
+				    Typed = Table.TransformColumnTypes(Kept, {{"candidate_id", Int64.Type}, {"decision_id", Int64.Type}, {"plan_name", type text}, {"shed_kw", type number}, {"edf_after", type number}, {"penalty_avoided_ntd", type number}, {"cost_ntd", type number}, {"delta_carbon_kg", type number}, {"esv_ntd", type number}, {"is_locked", type logical}, {"is_chosen", type logical}}),
+				    Add0 = Table.AddColumn(Typed, "plan_status", each if [is_chosen] then "選定方案" else if [is_locked] then "安全鎖定（不可選）" else "未選方案", type text)
+				in
+				    Add0

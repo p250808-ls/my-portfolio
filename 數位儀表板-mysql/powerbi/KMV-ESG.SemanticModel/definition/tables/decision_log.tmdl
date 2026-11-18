@@ -1,0 +1,144 @@
+table decision_log
+	lineageTag: 01eeaccd-b540-5c43-88bf-441d777785bf
+
+	measure '決策次數' = COUNTROWS ( decision_log )
+		formatString: 0
+		lineageTag: 91fbc34b-fb36-5252-9b21-276cc95f609a
+
+	measure '人工決策次數' = CALCULATE ( COUNTROWS ( decision_log ), decision_log[approval_mode] = "manual" )
+		formatString: 0
+		lineageTag: 7e4a279b-71f8-55ae-a8b4-fc7080386288
+
+	measure '鎖定觸發次數' = CALCULATE ( COUNTROWS ( decision_log ), LEN ( decision_log[locked_loads] ) > 2 )
+		formatString: 0
+		lineageTag: 78f74617-a46a-507e-a8ab-ed595a1536aa
+
+	column decision_id
+		dataType: int64
+		lineageTag: 9631d49c-a572-5ef5-8868-091db3ef4d79
+		summarizeBy: none
+		sourceColumn: decision_id
+
+	column ts
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn
+		lineageTag: 6274d9d7-1a00-55b3-a220-a6a74bdb65f4
+		summarizeBy: none
+		sourceColumn: ts
+
+	column interval_id
+		dataType: int64
+		lineageTag: 8fc19a96-a894-5dbd-b8e5-4b1864772bd4
+		summarizeBy: none
+		sourceColumn: interval_id
+
+	column edf_trigger
+		dataType: double
+		formatString: 0.0%
+		lineageTag: f6c0d4b3-c086-54bf-b4ac-90cb56c5f351
+		summarizeBy: sum
+		sourceColumn: edf_trigger
+
+	column tier
+		dataType: string
+		lineageTag: fc874afa-58bf-51f1-8d72-4d5e509a4afd
+		summarizeBy: none
+		sourceColumn: tier
+
+	column locked_loads
+		dataType: string
+		lineageTag: ee161b8c-c9da-59a6-b397-515b21e64d1f
+		summarizeBy: none
+		sourceColumn: locked_loads
+
+	column chosen_plan
+		dataType: string
+		lineageTag: 77a53211-fc49-544d-ba55-35cee2d1bdd3
+		summarizeBy: none
+		sourceColumn: chosen_plan
+
+	column esv_ntd
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 4e319122-8e86-5fb2-b7f0-dd67cece1084
+		summarizeBy: sum
+		sourceColumn: esv_ntd
+
+	column shed_kw
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 9e0f71b4-e408-5ec4-ad31-3e04dc886783
+		summarizeBy: sum
+		sourceColumn: shed_kw
+
+	column delta_carbon_kg
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 125f496f-465f-5fb2-a130-ea9a89871d8c
+		summarizeBy: sum
+		sourceColumn: delta_carbon_kg
+
+	column approval_mode
+		dataType: string
+		lineageTag: e92c517d-0097-5397-a76a-67e58087292b
+		summarizeBy: none
+		sourceColumn: approval_mode
+
+	column approval_delay_s
+		dataType: int64
+		lineageTag: 4f4451c9-935b-5d49-91bf-2d4b55d25167
+		summarizeBy: none
+		sourceColumn: approval_delay_s
+
+	column outcome_exceeded
+		dataType: boolean
+		lineageTag: 2dfc5f67-ab05-5da9-b9ad-909355204605
+		summarizeBy: none
+		sourceColumn: outcome_exceeded
+
+	column penalty_avoided_ntd
+		dataType: double
+		formatString: #,0.##
+		lineageTag: f9837e3b-47b6-5fc7-9b6c-3b09646a90a0
+		summarizeBy: sum
+		sourceColumn: penalty_avoided_ntd
+
+	column oc_production_ntd
+		dataType: double
+		formatString: #,0.##
+		lineageTag: dcb751af-bb6c-5817-8867-71ead6034b82
+		summarizeBy: sum
+		sourceColumn: oc_production_ntd
+
+	column carbon_cost_ntd
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 44d6a5c2-a803-586f-87e5-4e8082253747
+		summarizeBy: sum
+		sourceColumn: carbon_cost_ntd
+
+	column r_safety_ntd
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 68dd8d88-1c79-5ec6-8262-2c50fa5cc202
+		summarizeBy: sum
+		sourceColumn: r_safety_ntd
+
+	column decision_label
+		dataType: string
+		lineageTag: 81e86ff6-2243-593d-a427-3cf5d49b310d
+		summarizeBy: none
+		sourceColumn: decision_label
+
+	partition decision_log = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("tokaido.proxy.rlwy.net:18473", "kmv_esg", [ReturnSingleDatabase = true]),
+				    Data = Source{[Schema = "kmv_esg", Item = "decision_log"]}[Data],
+				    Kept = Table.SelectColumns(Data, {"decision_id", "ts", "interval_id", "edf_trigger", "tier", "locked_loads", "chosen_plan", "esv_ntd", "shed_kw", "delta_carbon_kg", "approval_mode", "approval_delay_s", "outcome_exceeded", "penalty_avoided_ntd", "oc_production_ntd", "carbon_cost_ntd", "r_safety_ntd"}),
+				    Json = Table.TransformColumns(Kept, {{"locked_loads", each if _ is binary then Text.FromBinary(_) else _, type text}}),
+				    Typed = Table.TransformColumnTypes(Json, {{"decision_id", Int64.Type}, {"ts", type datetime}, {"interval_id", Int64.Type}, {"edf_trigger", type number}, {"tier", type text}, {"chosen_plan", type text}, {"esv_ntd", type number}, {"shed_kw", type number}, {"delta_carbon_kg", type number}, {"approval_mode", type text}, {"approval_delay_s", Int64.Type}, {"outcome_exceeded", type logical}, {"penalty_avoided_ntd", type number}, {"oc_production_ntd", type number}, {"carbon_cost_ntd", type number}, {"r_safety_ntd", type number}}),
+				    Add0 = Table.AddColumn(Typed, "decision_label", each DateTime.ToText([ts], "MM/dd HH:mm") & "｜" & [tier] & "｜EDF " & Number.ToText([edf_trigger], "P0"), type text)
+				in
+				    Add0

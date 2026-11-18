@@ -1,0 +1,99 @@
+table carbon_budget_daily
+	lineageTag: b164a544-3dfc-5c3f-8456-9ac37f0d81dd
+
+	measure '最新碳EDF' =
+			VAR d = CALCULATE ( MAX ( carbon_budget_daily[day] ), ALL ( carbon_budget_daily ) )
+			RETURN CALCULATE ( MAX ( carbon_budget_daily[carbon_edf] ), ALL ( carbon_budget_daily ), carbon_budget_daily[day] = d )
+		formatString: 0.0%
+		lineageTag: db33feef-06a2-56d1-a3dd-af3bd77b2128
+
+	measure '最新碳預算剩餘_kg' =
+			VAR d = CALCULATE ( MAX ( carbon_budget_daily[day] ), ALL ( carbon_budget_daily ) )
+			RETURN CALCULATE ( MAX ( carbon_budget_daily[budget_remaining_kg] ), ALL ( carbon_budget_daily ), carbon_budget_daily[day] = d )
+		formatString: #,0
+		lineageTag: 2e19e8da-9355-5d34-b731-831eda56a3a0
+
+	measure '累計Scope2_kg' = SUM ( carbon_budget_daily[scope2_kg] )
+		formatString: #,0
+		lineageTag: e4c5aa34-d6dc-5d90-89b1-0c3be5809af6
+
+	measure '累計避免碳排_kg' = SUM ( carbon_budget_daily[avoided_carbon_kg] )
+		formatString: #,0.0
+		lineageTag: 13b38f17-cc8c-56f4-99f1-c5d7d1366c34
+
+	measure '碳強度' = DIVIDE ( SUM ( carbon_budget_daily[scope2_kg] ), SUM ( carbon_budget_daily[kwh_total] ) )
+		formatString: 0.000
+		lineageTag: 46674449-b4ca-58ac-af7c-a6dfa376bef3
+
+	column day
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 886bcddb-e640-5a1e-9ec6-7ff2231d047e
+		summarizeBy: none
+		sourceColumn: day
+
+	column kwh_total
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 60a0550f-41e2-5056-8706-04c4747a1bf7
+		summarizeBy: sum
+		sourceColumn: kwh_total
+
+	column scope2_kg
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 4fd36c8a-06c4-563e-aee6-f31615498a6a
+		summarizeBy: sum
+		sourceColumn: scope2_kg
+
+	column budget_remaining_kg
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 62833768-b33f-507b-9517-ab818233de9d
+		summarizeBy: sum
+		sourceColumn: budget_remaining_kg
+
+	column sigma_daily_kg
+		dataType: double
+		formatString: #,0.##
+		lineageTag: bc8902b9-2bfc-538d-898f-03f082a56be9
+		summarizeBy: sum
+		sourceColumn: sigma_daily_kg
+
+	column days_to_month_end
+		dataType: int64
+		lineageTag: 481d7751-6aae-51fa-bef7-3321bd072b50
+		summarizeBy: none
+		sourceColumn: days_to_month_end
+
+	column carbon_edf
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 6ca50ef4-fb8d-5ca3-9898-173d54418d72
+		summarizeBy: sum
+		sourceColumn: carbon_edf
+
+	column avoided_carbon_kg
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 2fc6c20c-8a12-5444-8f3c-ab62e8f6e3bc
+		summarizeBy: sum
+		sourceColumn: avoided_carbon_kg
+
+	column avoided_carbon_fee_ntd
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 02c85bae-0efe-53ea-895a-76c554ec91e1
+		summarizeBy: sum
+		sourceColumn: avoided_carbon_fee_ntd
+
+	partition carbon_budget_daily = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("tokaido.proxy.rlwy.net:18473", "kmv_esg", [ReturnSingleDatabase = true]),
+				    Data = Source{[Schema = "kmv_esg", Item = "carbon_budget_daily"]}[Data],
+				    Kept = Table.SelectColumns(Data, {"day", "kwh_total", "scope2_kg", "budget_remaining_kg", "sigma_daily_kg", "days_to_month_end", "carbon_edf", "avoided_carbon_kg", "avoided_carbon_fee_ntd"}),
+				    Typed = Table.TransformColumnTypes(Kept, {{"day", type date}, {"kwh_total", type number}, {"scope2_kg", type number}, {"budget_remaining_kg", type number}, {"sigma_daily_kg", type number}, {"days_to_month_end", Int64.Type}, {"carbon_edf", type number}, {"avoided_carbon_kg", type number}, {"avoided_carbon_fee_ntd", type number}})
+				in
+				    Typed

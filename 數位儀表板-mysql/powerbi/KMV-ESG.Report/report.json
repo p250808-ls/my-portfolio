@@ -1,0 +1,283 @@
+{
+  "config": "{\"version\": \"5.43\", \"activeSectionIndex\": 0, \"themeCollection\": {\"customTheme\": {\"name\": \"KMV_ESG_theme.json\", \"version\": \"5.43\", \"type\": 1}}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "name": "RegisteredResources",
+        "type": 1,
+        "items": [
+          {
+            "name": "KMV_ESG_theme.json",
+            "path": "KMV_ESG_theme.json",
+            "type": 201
+          }
+        ]
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{}",
+      "displayName": "即時超約戰情",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720,
+      "width": 1280,
+      "name": "ReportSection0",
+      "ordinal": 0,
+      "visualContainers": [
+        {
+          "config": "{\"name\": \"p0v00536ef7a2\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 20, \"z\": 0, \"width\": 200, \"height\": 130}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"power_reading.最新剩餘分鐘\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"power_reading\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"最新剩餘分鐘\"}, \"Name\": \"power_reading.最新剩餘分鐘\"}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"labels\": [{\"properties\": {\"labelDisplayUnits\": {\"expr\": {\"Literal\": {\"Value\": \"1D\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'距結算（分鐘）'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 130,
+          "width": 200,
+          "x": 20,
+          "y": 20,
+          "z": 0
+        },
+        {
+          "config": "{\"name\": \"p0v0136e07502\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 240, \"y\": 20, \"z\": 1, \"width\": 320, \"height\": 200}}], \"singleVisual\": {\"visualType\": \"gauge\", \"projections\": {\"Y\": [{\"queryRef\": \"power_reading.最新EDF\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"power_reading\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"最新EDF\"}, \"Name\": \"power_reading.最新EDF\"}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"axis\": [{\"properties\": {\"min\": {\"expr\": {\"Literal\": {\"Value\": \"0D\"}}}, \"max\": {\"expr\": {\"Literal\": {\"Value\": \"1D\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'當下 EDF（超約機率）'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 200,
+          "width": 320,
+          "x": 240,
+          "y": 20,
+          "z": 1
+        },
+        {
+          "config": "{\"name\": \"p0v025aa804a1\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 160, \"z\": 2, \"width\": 200, \"height\": 130}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"power_reading.最新Buffer_kW\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"power_reading\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"最新Buffer_kW\"}, \"Name\": \"power_reading.最新Buffer_kW\"}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"labels\": [{\"properties\": {\"labelDisplayUnits\": {\"expr\": {\"Literal\": {\"Value\": \"1D\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'剩餘配額 kW（負值＝預估超約）'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 130,
+          "width": 200,
+          "x": 20,
+          "y": 160,
+          "z": 2
+        },
+        {
+          "config": "{\"name\": \"p0v03e57a58f4\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 580, \"y\": 20, \"z\": 3, \"width\": 680, \"height\": 200}}], \"singleVisual\": {\"visualType\": \"multiRowCard\", \"projections\": {\"Values\": [{\"queryRef\": \"power_reading.最新鎖定狀態\"}, {\"queryRef\": \"power_reading.最新WBGT\"}, {\"queryRef\": \"power_reading.最新製程溫度\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"power_reading\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"最新鎖定狀態\"}, \"Name\": \"power_reading.最新鎖定狀態\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"最新WBGT\"}, \"Name\": \"power_reading.最新WBGT\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"最新製程溫度\"}, \"Name\": \"power_reading.最新製程溫度\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'安全鎖定狀態（WBGT ≥ 28 鎖冰水主機；製程溫度 < 82 鎖馬達）'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 200,
+          "width": 680,
+          "x": 580,
+          "y": 20,
+          "z": 3
+        },
+        {
+          "config": "{\"name\": \"p0v04db24d979\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 240, \"y\": 240, \"z\": 4, \"width\": 500, \"height\": 460}}], \"singleVisual\": {\"visualType\": \"lineChart\", \"projections\": {\"Category\": [{\"queryRef\": \"power_reading.minute_in_interval\"}], \"Y\": [{\"queryRef\": \"power_reading.最新區間平均需量\"}, {\"queryRef\": \"power_reading.契約容量\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"power_reading\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"minute_in_interval\"}, \"Name\": \"power_reading.minute_in_interval\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"最新區間平均需量\"}, \"Name\": \"power_reading.最新區間平均需量\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"契約容量\"}, \"Name\": \"power_reading.契約容量\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'本結算區間需量累積 vs 契約容量'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 460,
+          "width": 500,
+          "x": 240,
+          "y": 240,
+          "z": 4
+        },
+        {
+          "config": "{\"name\": \"p0v059459f9e7\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 760, \"y\": 240, \"z\": 5, \"width\": 500, \"height\": 460}}], \"singleVisual\": {\"visualType\": \"lineChart\", \"projections\": {\"Category\": [{\"queryRef\": \"power_reading.ts\"}], \"Y\": [{\"queryRef\": \"power_reading.近2小時EDF\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"power_reading\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"ts\"}, \"Name\": \"power_reading.ts\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"近2小時EDF\"}, \"Name\": \"power_reading.近2小時EDF\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'近 2 小時 EDF'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 460,
+          "width": 500,
+          "x": 760,
+          "y": 240,
+          "z": 5
+        }
+      ]
+    },
+    {
+      "config": "{}",
+      "displayName": "決策品質",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720,
+      "width": 1280,
+      "name": "ReportSection1",
+      "ordinal": 1,
+      "visualContainers": [
+        {
+          "config": "{\"name\": \"p1v00cc4b8f33\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 20, \"z\": 0, \"width\": 200, \"height\": 110}}], \"singleVisual\": {\"visualType\": \"slicer\", \"projections\": {\"Values\": [{\"queryRef\": \"decision_log.decision_label\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"decision_log\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"decision_label\"}, \"Name\": \"decision_log.decision_label\"}], \"OrderBy\": [{\"Direction\": 2, \"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"decision_label\"}}}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"data\": [{\"properties\": {\"mode\": {\"expr\": {\"Literal\": {\"Value\": \"'Dropdown'\"}}}}}], \"header\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'挑一次決策（時間｜分級｜EDF）'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 110,
+          "width": 200,
+          "x": 20,
+          "y": 20,
+          "z": 0
+        },
+        {
+          "config": "{\"name\": \"p1v010cadec38\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 135, \"z\": 1, \"width\": 200, \"height\": 110}}], \"singleVisual\": {\"visualType\": \"textbox\", \"drillFilterOtherVisuals\": true, \"objects\": {\"general\": [{\"properties\": {\"paragraphs\": [{\"textRuns\": [{\"value\": \"選一次決策 → 象限圖只顯示\", \"textStyle\": {\"fontSize\": \"10pt\", \"color\": \"#52514e\"}}]}, {\"textRuns\": [{\"value\": \"該次的候選方案（最多 7 個）。\", \"textStyle\": {\"fontSize\": \"10pt\", \"color\": \"#52514e\"}}]}, {\"textRuns\": [{\"value\": \" \", \"textStyle\": {\"fontSize\": \"10pt\", \"color\": \"#52514e\"}}]}, {\"textRuns\": [{\"value\": \"不選＝顯示所有決策。\", \"textStyle\": {\"fontSize\": \"10pt\", \"color\": \"#52514e\"}}]}]}}]}}}",
+          "filters": "[]",
+          "height": 110,
+          "width": 200,
+          "x": 20,
+          "y": 135,
+          "z": 1
+        },
+        {
+          "config": "{\"name\": \"p1v0293db5181\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 255, \"z\": 2, \"width\": 200, \"height\": 190}}], \"singleVisual\": {\"visualType\": \"slicer\", \"projections\": {\"Values\": [{\"queryRef\": \"decision_log.tier\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"decision_log\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"tier\"}, \"Name\": \"decision_log.tier\"}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"data\": [{\"properties\": {\"mode\": {\"expr\": {\"Literal\": {\"Value\": \"'Basic'\"}}}}}], \"header\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'風險分級（tier2 低 → tier4 高）'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 190,
+          "width": 200,
+          "x": 20,
+          "y": 255,
+          "z": 2
+        },
+        {
+          "config": "{\"name\": \"p1v03efa6a0d9\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 455, \"z\": 3, \"width\": 200, \"height\": 130}}], \"singleVisual\": {\"visualType\": \"slicer\", \"projections\": {\"Values\": [{\"queryRef\": \"decision_log.approval_mode\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"decision_log\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"approval_mode\"}, \"Name\": \"decision_log.approval_mode\"}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"data\": [{\"properties\": {\"mode\": {\"expr\": {\"Literal\": {\"Value\": \"'Basic'\"}}}}}], \"header\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'核准方式（auto 自動／manual 人工）'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 130,
+          "width": 200,
+          "x": 20,
+          "y": 455,
+          "z": 3
+        },
+        {
+          "config": "{\"name\": \"p1v04ae146149\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 240, \"y\": 20, \"z\": 4, \"width\": 520, \"height\": 340}}], \"singleVisual\": {\"visualType\": \"scatterChart\", \"projections\": {\"Category\": [{\"queryRef\": \"decision_candidates.candidate_id\"}], \"Series\": [{\"queryRef\": \"decision_candidates.plan_status\"}], \"X\": [{\"queryRef\": \"Sum(decision_candidates.cost_ntd)\"}], \"Y\": [{\"queryRef\": \"Sum(decision_candidates.delta_carbon_kg)\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"decision_candidates\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"candidate_id\"}, \"Name\": \"decision_candidates.candidate_id\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"plan_status\"}, \"Name\": \"decision_candidates.plan_status\"}, {\"Aggregation\": {\"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"cost_ntd\"}}, \"Function\": 0}, \"Name\": \"Sum(decision_candidates.cost_ntd)\"}, {\"Aggregation\": {\"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"delta_carbon_kg\"}}, \"Function\": 0}, \"Name\": \"Sum(decision_candidates.delta_carbon_kg)\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'方案象限圖（X 成本 NTD；Y 碳排變化 kg，負值＝減碳）'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 340,
+          "width": 520,
+          "x": 240,
+          "y": 20,
+          "z": 4
+        },
+        {
+          "config": "{\"name\": \"p1v05d339ed5c\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 780, \"y\": 20, \"z\": 5, \"width\": 230, \"height\": 110}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"interval_settlement.預警命中率\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"interval_settlement\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"預警命中率\"}, \"Name\": \"interval_settlement.預警命中率\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'預警命中率（引擎介入後）'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 110,
+          "width": 230,
+          "x": 780,
+          "y": 20,
+          "z": 5
+        },
+        {
+          "config": "{\"name\": \"p1v0687dc19b8\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 1030, \"y\": 20, \"z\": 6, \"width\": 230, \"height\": 110}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"interval_settlement.避免罰款累計\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"interval_settlement\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"避免罰款累計\"}, \"Name\": \"interval_settlement.避免罰款累計\"}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"labels\": [{\"properties\": {\"labelDisplayUnits\": {\"expr\": {\"Literal\": {\"Value\": \"1D\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'避免罰款累計 NTD'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 110,
+          "width": 230,
+          "x": 1030,
+          "y": 20,
+          "z": 6
+        },
+        {
+          "config": "{\"name\": \"p1v0740fde655\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 780, \"y\": 140, \"z\": 7, \"width\": 480, \"height\": 220}}], \"singleVisual\": {\"visualType\": \"clusteredColumnChart\", \"projections\": {\"Category\": [{\"queryRef\": \"interval_settlement.day\"}], \"Y\": [{\"queryRef\": \"interval_settlement.避免罰款累計\"}, {\"queryRef\": \"interval_settlement.實際罰款累計\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"interval_settlement\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"day\"}, \"Name\": \"interval_settlement.day\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"避免罰款累計\"}, \"Name\": \"interval_settlement.避免罰款累計\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"實際罰款累計\"}, \"Name\": \"interval_settlement.實際罰款累計\"}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"categoryAxis\": [{\"properties\": {\"axisType\": {\"expr\": {\"Literal\": {\"Value\": \"'Categorical'\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'每日避免罰款 vs 實際罰款（NTD）'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 220,
+          "width": 480,
+          "x": 780,
+          "y": 140,
+          "z": 7
+        },
+        {
+          "config": "{\"name\": \"p1v08d11d6621\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 240, \"y\": 380, \"z\": 8, \"width\": 640, \"height\": 320}}], \"singleVisual\": {\"visualType\": \"tableEx\", \"projections\": {\"Values\": [{\"queryRef\": \"decision_log.ts\"}, {\"queryRef\": \"decision_log.tier\"}, {\"queryRef\": \"decision_log.chosen_plan\"}, {\"queryRef\": \"Sum(decision_log.edf_trigger)\"}, {\"queryRef\": \"Sum(decision_log.esv_ntd)\"}, {\"queryRef\": \"Sum(decision_log.shed_kw)\"}, {\"queryRef\": \"Sum(decision_log.delta_carbon_kg)\"}, {\"queryRef\": \"decision_log.approval_mode\"}, {\"queryRef\": \"decision_log.outcome_exceeded\"}, {\"queryRef\": \"decision_log.locked_loads\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"decision_log\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"ts\"}, \"Name\": \"decision_log.ts\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"tier\"}, \"Name\": \"decision_log.tier\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"chosen_plan\"}, \"Name\": \"decision_log.chosen_plan\"}, {\"Aggregation\": {\"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"edf_trigger\"}}, \"Function\": 0}, \"Name\": \"Sum(decision_log.edf_trigger)\"}, {\"Aggregation\": {\"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"esv_ntd\"}}, \"Function\": 0}, \"Name\": \"Sum(decision_log.esv_ntd)\"}, {\"Aggregation\": {\"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"shed_kw\"}}, \"Function\": 0}, \"Name\": \"Sum(decision_log.shed_kw)\"}, {\"Aggregation\": {\"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"delta_carbon_kg\"}}, \"Function\": 0}, \"Name\": \"Sum(decision_log.delta_carbon_kg)\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"approval_mode\"}, \"Name\": \"decision_log.approval_mode\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"outcome_exceeded\"}, \"Name\": \"decision_log.outcome_exceeded\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"locked_loads\"}, \"Name\": \"decision_log.locked_loads\"}], \"OrderBy\": [{\"Direction\": 2, \"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"ts\"}}}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"total\": [{\"properties\": {\"totals\": {\"expr\": {\"Literal\": {\"Value\": \"false\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'決策日誌'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 320,
+          "width": 640,
+          "x": 240,
+          "y": 380,
+          "z": 8
+        },
+        {
+          "config": "{\"name\": \"p1v0944a85c6c\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 900, \"y\": 380, \"z\": 9, \"width\": 360, \"height\": 320}}], \"singleVisual\": {\"visualType\": \"clusteredColumnChart\", \"projections\": {\"Category\": [{\"queryRef\": \"decision_log.approval_delay_s\"}], \"Y\": [{\"queryRef\": \"decision_log.人工決策次數\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"decision_log\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"approval_delay_s\"}, \"Name\": \"decision_log.approval_delay_s\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"人工決策次數\"}, \"Name\": \"decision_log.人工決策次數\"}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"categoryAxis\": [{\"properties\": {\"axisType\": {\"expr\": {\"Literal\": {\"Value\": \"'Categorical'\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'人工確認延遲分布（tier3，秒）'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 320,
+          "width": 360,
+          "x": 900,
+          "y": 380,
+          "z": 9
+        }
+      ]
+    },
+    {
+      "config": "{}",
+      "displayName": "ESG 累計成效",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720,
+      "width": 1280,
+      "name": "ReportSection2",
+      "ordinal": 2,
+      "visualContainers": [
+        {
+          "config": "{\"name\": \"p2v00223fd29d\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 20, \"z\": 0, \"width\": 600, \"height\": 150}}], \"singleVisual\": {\"visualType\": \"hundredPercentStackedBarChart\", \"projections\": {\"Y\": [{\"queryRef\": \"carbon_budget_daily.累計Scope2_kg\"}, {\"queryRef\": \"carbon_budget_daily.最新碳預算剩餘_kg\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"carbon_budget_daily\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"累計Scope2_kg\"}, \"Name\": \"carbon_budget_daily.累計Scope2_kg\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"最新碳預算剩餘_kg\"}, \"Name\": \"carbon_budget_daily.最新碳預算剩餘_kg\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'碳預算消耗（7 天迷你月）'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 150,
+          "width": 600,
+          "x": 20,
+          "y": 20,
+          "z": 0
+        },
+        {
+          "config": "{\"name\": \"p2v0105fcf894\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 640, \"y\": 20, \"z\": 1, \"width\": 200, \"height\": 150}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"carbon_budget_daily.最新碳EDF\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"carbon_budget_daily\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"最新碳EDF\"}, \"Name\": \"carbon_budget_daily.最新碳EDF\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'碳 EDF（超預算機率）'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 150,
+          "width": 200,
+          "x": 640,
+          "y": 20,
+          "z": 1
+        },
+        {
+          "config": "{\"name\": \"p2v02051f8de5\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 860, \"y\": 20, \"z\": 2, \"width\": 190, \"height\": 150}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"decision_log.鎖定觸發次數\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"decision_log\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"鎖定觸發次數\"}, \"Name\": \"decision_log.鎖定觸發次數\"}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"labels\": [{\"properties\": {\"labelDisplayUnits\": {\"expr\": {\"Literal\": {\"Value\": \"1D\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'安全鎖定觸發次數'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 150,
+          "width": 190,
+          "x": 860,
+          "y": 20,
+          "z": 2
+        },
+        {
+          "config": "{\"name\": \"p2v03abf4e7c1\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 1070, \"y\": 20, \"z\": 3, \"width\": 190, \"height\": 150}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"power_reading.綠電匹配率\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"power_reading\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"綠電匹配率\"}, \"Name\": \"power_reading.綠電匹配率\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'綠電匹配率（高 EDF 時段）'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 150,
+          "width": 190,
+          "x": 1070,
+          "y": 20,
+          "z": 3
+        },
+        {
+          "config": "{\"name\": \"p2v04133699fb\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 190, \"z\": 4, \"width\": 600, \"height\": 260}}], \"singleVisual\": {\"visualType\": \"waterfallChart\", \"projections\": {\"Category\": [{\"queryRef\": \"esg_waterfall_daily.component\"}], \"Y\": [{\"queryRef\": \"Sum(esg_waterfall_daily.ntd)\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"esg_waterfall_daily\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"component\"}, \"Name\": \"esg_waterfall_daily.component\"}, {\"Aggregation\": {\"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"ntd\"}}, \"Function\": 0}, \"Name\": \"Sum(esg_waterfall_daily.ntd)\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'ESG 貢獻瀑布圖（NTD，總計＝淨 ESV）'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 260,
+          "width": 600,
+          "x": 20,
+          "y": 190,
+          "z": 4
+        },
+        {
+          "config": "{\"name\": \"p2v0587571f7a\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 640, \"y\": 190, \"z\": 5, \"width\": 300, \"height\": 260}}], \"singleVisual\": {\"visualType\": \"clusteredColumnChart\", \"projections\": {\"Category\": [{\"queryRef\": \"carbon_budget_daily.day\"}], \"Y\": [{\"queryRef\": \"interval_settlement.日平均EDF10\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"carbon_budget_daily\", \"Type\": 0}, {\"Name\": \"t1\", \"Entity\": \"interval_settlement\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"day\"}, \"Name\": \"carbon_budget_daily.day\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t1\"}}, \"Property\": \"日平均EDF10\"}, \"Name\": \"interval_settlement.日平均EDF10\"}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"categoryAxis\": [{\"properties\": {\"axisType\": {\"expr\": {\"Literal\": {\"Value\": \"'Categorical'\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'每日平均 EDF（第 10 分鐘）'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 260,
+          "width": 300,
+          "x": 640,
+          "y": 190,
+          "z": 5
+        },
+        {
+          "config": "{\"name\": \"p2v0671b0f6c8\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 960, \"y\": 190, \"z\": 6, \"width\": 300, \"height\": 260}}], \"singleVisual\": {\"visualType\": \"lineChart\", \"projections\": {\"Category\": [{\"queryRef\": \"carbon_budget_daily.day\"}], \"Y\": [{\"queryRef\": \"carbon_budget_daily.碳強度\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"carbon_budget_daily\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"day\"}, \"Name\": \"carbon_budget_daily.day\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"碳強度\"}, \"Name\": \"carbon_budget_daily.碳強度\"}]}, \"drillFilterOtherVisuals\": true, \"objects\": {\"categoryAxis\": [{\"properties\": {\"axisType\": {\"expr\": {\"Literal\": {\"Value\": \"'Categorical'\"}}}}}]}, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'每日碳強度 kgCO2e/kWh'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 260,
+          "width": 300,
+          "x": 960,
+          "y": 190,
+          "z": 6
+        },
+        {
+          "config": "{\"name\": \"p2v074b68a3b0\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 470, \"z\": 7, \"width\": 620, \"height\": 230}}], \"singleVisual\": {\"visualType\": \"pivotTable\", \"projections\": {\"Rows\": [{\"queryRef\": \"power_reading.date\"}], \"Columns\": [{\"queryRef\": \"power_reading.hour\"}], \"Values\": [{\"queryRef\": \"Avg(power_reading.load_kw)\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"power_reading\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"date\"}, \"Name\": \"power_reading.date\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"hour\"}, \"Name\": \"power_reading.hour\"}, {\"Aggregation\": {\"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"load_kw\"}}, \"Function\": 1}, \"Name\": \"Avg(power_reading.load_kw)\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'平均負載 kW（日 × 小時）'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 230,
+          "width": 620,
+          "x": 20,
+          "y": 470,
+          "z": 7
+        },
+        {
+          "config": "{\"name\": \"p2v082e1d74e4\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 660, \"y\": 470, \"z\": 8, \"width\": 600, \"height\": 230}}], \"singleVisual\": {\"visualType\": \"pivotTable\", \"projections\": {\"Rows\": [{\"queryRef\": \"power_reading.date\"}], \"Columns\": [{\"queryRef\": \"power_reading.hour\"}], \"Values\": [{\"queryRef\": \"Avg(power_reading.grid_ef)\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"t0\", \"Entity\": \"power_reading\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"date\"}, \"Name\": \"power_reading.date\"}, {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"hour\"}, \"Name\": \"power_reading.hour\"}, {\"Aggregation\": {\"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"t0\"}}, \"Property\": \"grid_ef\"}}, \"Function\": 1}, \"Name\": \"Avg(power_reading.grid_ef)\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'平均排碳係數 kgCO2e/kWh（日 × 小時）'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 230,
+          "width": 600,
+          "x": 660,
+          "y": 470,
+          "z": 8
+        }
+      ]
+    }
+  ]
+}

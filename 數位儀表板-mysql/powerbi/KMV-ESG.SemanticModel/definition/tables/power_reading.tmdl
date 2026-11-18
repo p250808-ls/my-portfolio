@@ -1,0 +1,198 @@
+table power_reading
+	lineageTag: 3def249e-a8c5-53ed-af7c-c23180f3cf68
+
+	measure '最新EDF' =
+			VAR t = CALCULATE ( MAX ( power_reading[ts] ), ALL ( power_reading ) )
+			RETURN CALCULATE ( MAX ( power_reading[edf] ), ALL ( power_reading ), power_reading[ts] = t )
+		formatString: 0.0%
+		lineageTag: 74710ca5-2805-5c24-9020-98406ef1c5ac
+
+	measure '最新剩餘分鐘' =
+			VAR t = CALCULATE ( MAX ( power_reading[ts] ), ALL ( power_reading ) )
+			RETURN CALCULATE ( MAX ( power_reading[remaining_minutes] ), ALL ( power_reading ), power_reading[ts] = t )
+		formatString: 0
+		lineageTag: e4a8343a-773e-533a-a0fa-64e21b2ac986
+
+	measure '最新Buffer_kW' =
+			VAR t = CALCULATE ( MAX ( power_reading[ts] ), ALL ( power_reading ) )
+			RETURN CALCULATE ( MAX ( power_reading[buffer_kw] ), ALL ( power_reading ), power_reading[ts] = t )
+		formatString: #,0
+		lineageTag: 0dfd1da5-59b5-52b6-80e8-8f7f9df31465
+
+	measure '最新區間ID' =
+			VAR t = CALCULATE ( MAX ( power_reading[ts] ), ALL ( power_reading ) )
+			RETURN CALCULATE ( MAX ( power_reading[interval_id] ), ALL ( power_reading ), power_reading[ts] = t )
+		formatString: 0
+		lineageTag: d7d82e59-ac8e-5cc0-b37b-0a1e827f65a4
+
+	measure '最新WBGT' =
+			VAR t = CALCULATE ( MAX ( power_reading[ts] ), ALL ( power_reading ) )
+			RETURN CALCULATE ( MAX ( power_reading[wbgt] ), ALL ( power_reading ), power_reading[ts] = t )
+		formatString: 0.0
+		lineageTag: 30a11c39-1a53-5fc3-92ab-d8a86e494fcf
+
+	measure '最新製程溫度' =
+			VAR t = CALCULATE ( MAX ( power_reading[ts] ), ALL ( power_reading ) )
+			RETURN CALCULATE ( MAX ( power_reading[process_temp] ), ALL ( power_reading ), power_reading[ts] = t )
+		formatString: 0.0
+		lineageTag: fc0fa3ee-bd73-5df2-9fb2-ca8762d42906
+
+	measure '最新鎖定狀態' =
+			VAR t = CALCULATE ( MAX ( power_reading[ts] ), ALL ( power_reading ) )
+			VAR s = LOOKUPVALUE ( power_reading[locked_status_text], power_reading[ts], t )
+			RETURN IF ( s = "", "無鎖定", s )
+		lineageTag: 41b17e8a-3187-5c78-aba8-bb9f5b2327d3
+
+	measure '最新區間平均需量' =
+			VAR latestInterval = [最新區間ID]
+			RETURN CALCULATE ( AVERAGE ( power_reading[avg_kw_so_far] ), power_reading[interval_id] = latestInterval )
+		formatString: #,0
+		lineageTag: 7674fd4a-b0c7-5388-bd73-ed3215f840c6
+
+	measure '契約容量' = MAX ( power_reading[contract_kw] )
+		formatString: #,0
+		lineageTag: cbbfd9ac-cbe6-5b58-8247-93836400f1f4
+
+	measure '近2小時EDF' =
+			VAR t = CALCULATE ( MAX ( power_reading[ts] ), ALL ( power_reading ) )
+			RETURN IF ( MAX ( power_reading[ts] ) >= t - 2 / 24, AVERAGE ( power_reading[edf] ) )
+		formatString: 0.0%
+		lineageTag: a67ef59e-1e52-59eb-b2fc-6ce64c16318f
+
+	measure '綠電匹配率' = CALCULATE ( AVERAGE ( power_reading[renewable_pct] ), power_reading[edf] >= 0.5 ) / 100
+		formatString: 0.0%
+		lineageTag: 1e55b25c-f46a-57dc-bbb3-7e9aafb9e0d9
+
+	column ts
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn
+		lineageTag: aa5fff70-7cce-5731-851f-52bf1c5dfaf5
+		summarizeBy: none
+		sourceColumn: ts
+
+	column interval_id
+		dataType: int64
+		lineageTag: 9da67d9b-1cdd-589b-a17f-cad9bf3376c5
+		summarizeBy: none
+		sourceColumn: interval_id
+
+	column minute_in_interval
+		dataType: int64
+		lineageTag: 3cfb4593-9021-59e7-b8a7-d8b920c9ef5c
+		summarizeBy: none
+		sourceColumn: minute_in_interval
+
+	column remaining_minutes
+		dataType: int64
+		lineageTag: 25ab18e2-9615-541c-88cd-e8bbec21df49
+		summarizeBy: none
+		sourceColumn: remaining_minutes
+
+	column load_kw
+		dataType: double
+		formatString: #,0.##
+		lineageTag: d32f8a4c-5c33-5138-866d-98211781b737
+		summarizeBy: sum
+		sourceColumn: load_kw
+
+	column avg_kw_so_far
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 4d039a18-7aaf-5f56-ab2a-9164c09f2654
+		summarizeBy: sum
+		sourceColumn: avg_kw_so_far
+
+	column contract_kw
+		dataType: double
+		formatString: #,0.##
+		lineageTag: acb7de76-34b5-5e07-a6c9-4864e38a62bb
+		summarizeBy: sum
+		sourceColumn: contract_kw
+
+	column buffer_kw
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 92a17f4d-08ed-53af-9f6e-657ead40ffaa
+		summarizeBy: sum
+		sourceColumn: buffer_kw
+
+	column sigma_kw
+		dataType: double
+		formatString: #,0.##
+		lineageTag: c25a14b0-03ae-5b26-98fd-230fcaecb202
+		summarizeBy: sum
+		sourceColumn: sigma_kw
+
+	column sigma_avg_kw
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 19b0490f-b343-5080-a28e-eecc88c6dcc7
+		summarizeBy: sum
+		sourceColumn: sigma_avg_kw
+
+	column edf
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 01d8ee85-1119-55df-8a8a-b0ca59e23e19
+		summarizeBy: sum
+		sourceColumn: edf
+
+	column grid_ef
+		dataType: double
+		formatString: #,0.##
+		lineageTag: ad8bdb2e-a824-52d3-9c87-b6a8150d5c21
+		summarizeBy: sum
+		sourceColumn: grid_ef
+
+	column renewable_pct
+		dataType: double
+		formatString: #,0.##
+		lineageTag: e04585e6-d0c8-5376-abf7-3e487f0405f9
+		summarizeBy: sum
+		sourceColumn: renewable_pct
+
+	column wbgt
+		dataType: double
+		formatString: #,0.##
+		lineageTag: b73d9ba3-3fd2-5f59-97af-9eff9da6e6a5
+		summarizeBy: sum
+		sourceColumn: wbgt
+
+	column process_temp
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 2a530d83-d90a-5d97-9dee-2d4ef4c8a5eb
+		summarizeBy: sum
+		sourceColumn: process_temp
+
+	column locked_status_text
+		dataType: string
+		lineageTag: 6939f01d-e553-5fbe-b88f-b45264b5deb2
+		summarizeBy: none
+		sourceColumn: locked_status_text
+
+	column date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 26d8caac-e683-52a6-a9fd-afb2ecdd4945
+		summarizeBy: none
+		sourceColumn: date
+
+	column hour
+		dataType: int64
+		lineageTag: 12bffb27-a295-590a-bf48-49111779ff94
+		summarizeBy: none
+		sourceColumn: hour
+
+	partition power_reading = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("tokaido.proxy.rlwy.net:18473", "kmv_esg", [ReturnSingleDatabase = true]),
+				    Data = Source{[Schema = "kmv_esg", Item = "power_reading"]}[Data],
+				    Kept = Table.SelectColumns(Data, {"ts", "interval_id", "minute_in_interval", "remaining_minutes", "load_kw", "avg_kw_so_far", "contract_kw", "buffer_kw", "sigma_kw", "sigma_avg_kw", "edf", "grid_ef", "renewable_pct", "wbgt", "process_temp", "locked_status_text"}),
+				    Typed = Table.TransformColumnTypes(Kept, {{"ts", type datetime}, {"interval_id", Int64.Type}, {"minute_in_interval", Int64.Type}, {"remaining_minutes", Int64.Type}, {"load_kw", type number}, {"avg_kw_so_far", type number}, {"contract_kw", type number}, {"buffer_kw", type number}, {"sigma_kw", type number}, {"sigma_avg_kw", type number}, {"edf", type number}, {"grid_ef", type number}, {"renewable_pct", type number}, {"wbgt", type number}, {"process_temp", type number}, {"locked_status_text", type text}}),
+				    Add0 = Table.AddColumn(Typed, "date", each DateTime.Date([ts]), type date),
+				    Add1 = Table.AddColumn(Add0, "hour", each Time.Hour([ts]), Int64.Type)
+				in
+				    Add1

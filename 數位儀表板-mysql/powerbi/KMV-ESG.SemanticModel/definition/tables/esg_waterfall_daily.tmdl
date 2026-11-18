@@ -1,0 +1,40 @@
+table esg_waterfall_daily
+	lineageTag: e958df92-0b41-5264-a0db-060dc233d10c
+
+	column day
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: eba19679-ab70-5a1f-8972-14cc79416794
+		summarizeBy: none
+		sourceColumn: day
+
+	column sort_order
+		dataType: int64
+		lineageTag: 046546a4-5a90-5d24-8e1b-8d32e9210fb9
+		summarizeBy: none
+		sourceColumn: sort_order
+
+	column component
+		dataType: string
+		lineageTag: 20db80a8-0ee3-5a62-9988-284615fa4d5a
+		summarizeBy: none
+		sourceColumn: component
+		sortByColumn: sort_order
+
+	column ntd
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 67809a68-d21e-5611-97f3-3b8ca81afbfd
+		summarizeBy: sum
+		sourceColumn: ntd
+
+	partition esg_waterfall_daily = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("tokaido.proxy.rlwy.net:18473", "kmv_esg", [ReturnSingleDatabase = true]),
+				    Data = Source{[Schema = "kmv_esg", Item = "esg_waterfall_daily"]}[Data],
+				    Kept = Table.SelectColumns(Data, {"day", "sort_order", "component", "ntd"}),
+				    Typed = Table.TransformColumnTypes(Kept, {{"day", type date}, {"sort_order", Int64.Type}, {"component", type text}, {"ntd", type number}})
+				in
+				    Typed

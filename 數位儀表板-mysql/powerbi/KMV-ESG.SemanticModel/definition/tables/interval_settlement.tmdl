@@ -1,0 +1,112 @@
+table interval_settlement
+	lineageTag: 9026d2fd-8210-5fe0-b3fa-a8eadb934346
+
+	measure '避免罰款累計' = SUM ( interval_settlement[avoided_penalty_ntd] )
+		formatString: #,0
+		lineageTag: baa501ac-0f25-59e1-90fc-63b1e44f9f3a
+
+	measure '實際罰款累計' = SUM ( interval_settlement[penalty_ntd] )
+		formatString: #,0
+		lineageTag: 3edcbd62-8d01-5a88-8348-ebfd06955be6
+
+	measure '預警次數' = CALCULATE ( COUNTROWS ( interval_settlement ), interval_settlement[edf_at_10] >= 0.5 )
+		formatString: 0
+		lineageTag: c9d552c2-b70c-54ce-87bb-a6ec8f070b88
+
+	measure '預警命中數' = CALCULATE ( COUNTROWS ( interval_settlement ), interval_settlement[edf_at_10] >= 0.5, interval_settlement[exceeded] = TRUE () )
+		formatString: 0
+		lineageTag: 26d5de64-cca1-59f1-9b0b-89664103e056
+
+	measure '預警命中率' = DIVIDE ( [預警命中數], [預警次數] )
+		formatString: 0.0%
+		lineageTag: f5756b29-9e16-54a2-81df-e36db7d0af64
+
+	measure '日平均EDF10' = AVERAGE ( interval_settlement[edf_at_10] )
+		formatString: 0.0%
+		lineageTag: 84268e9f-6013-524c-9044-d8141502f7e8
+
+	column interval_id
+		dataType: int64
+		lineageTag: 39baa60f-7e78-5241-be29-9d907236277a
+		summarizeBy: none
+		sourceColumn: interval_id
+
+	column interval_start
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn
+		lineageTag: f8190d11-cc9f-5a3b-a309-dca9e9430947
+		summarizeBy: none
+		sourceColumn: interval_start
+
+	column avg_kw
+		dataType: double
+		formatString: #,0.##
+		lineageTag: d5822ca9-7582-5f8e-9b5c-41bfa6c7a9ca
+		summarizeBy: sum
+		sourceColumn: avg_kw
+
+	column contract_kw
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 0efc3644-915e-5acf-86cc-defd80eeebf1
+		summarizeBy: sum
+		sourceColumn: contract_kw
+
+	column exceeded
+		dataType: boolean
+		lineageTag: baaeabea-b7b0-5af2-9568-99353590943a
+		summarizeBy: none
+		sourceColumn: exceeded
+
+	column penalty_ntd
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 81852bb8-9eae-5cd3-ac8b-0088e76111a7
+		summarizeBy: sum
+		sourceColumn: penalty_ntd
+
+	column edf_at_5
+		dataType: double
+		formatString: 0.0%
+		lineageTag: f139dd99-b091-5884-a4c5-6b92f6534d44
+		summarizeBy: sum
+		sourceColumn: edf_at_5
+
+	column edf_at_10
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 0febd739-455b-5561-b32b-2f8989d147db
+		summarizeBy: sum
+		sourceColumn: edf_at_10
+
+	column action_taken
+		dataType: string
+		lineageTag: 9dddd843-c14a-50f5-af0e-587926be6753
+		summarizeBy: none
+		sourceColumn: action_taken
+
+	column avoided_penalty_ntd
+		dataType: double
+		formatString: #,0.##
+		lineageTag: 9c042962-c3a9-530d-925b-faa88dc8fc31
+		summarizeBy: sum
+		sourceColumn: avoided_penalty_ntd
+
+	column day
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: a264da9d-181a-50a7-a883-868c87d78794
+		summarizeBy: none
+		sourceColumn: day
+
+	partition interval_settlement = m
+		mode: import
+		source =
+				let
+				    Source = MySQL.Database("tokaido.proxy.rlwy.net:18473", "kmv_esg", [ReturnSingleDatabase = true]),
+				    Data = Source{[Schema = "kmv_esg", Item = "interval_settlement"]}[Data],
+				    Kept = Table.SelectColumns(Data, {"interval_id", "interval_start", "avg_kw", "contract_kw", "exceeded", "penalty_ntd", "edf_at_5", "edf_at_10", "action_taken", "avoided_penalty_ntd"}),
+				    Typed = Table.TransformColumnTypes(Kept, {{"interval_id", Int64.Type}, {"interval_start", type datetime}, {"avg_kw", type number}, {"contract_kw", type number}, {"exceeded", type logical}, {"penalty_ntd", type number}, {"edf_at_5", type number}, {"edf_at_10", type number}, {"action_taken", type text}, {"avoided_penalty_ntd", type number}}),
+				    Add0 = Table.AddColumn(Typed, "day", each DateTime.Date([interval_start]), type date)
+				in
+				    Add0
