@@ -20,9 +20,8 @@ GitHub my-portfolio/數位儀表板-mysql ──► Railway kmv-worker（Dockerf
 | 資料庫／帳號 | `kmv_esg`／`kmv`（密碼存在 kmv-worker 的 `KMV_DB_PASSWORD` 變數） |
 | kmv-worker 來源 | GitHub `p250808-ls/my-portfolio`，`main` 分支，Root Directory `/數位儀表板-mysql` |
 | 自動部署範圍 | Watch Paths `/數位儀表板-mysql/**`：只有這個資料夾有變動才重新部署，作品集其他資料夾不影響 |
-| 設定檔 | Railway Config File `/數位儀表板-mysql/railway.json`（Railway 不會依 Root Directory 自動找設定檔，要寫完整路徑） |
 | kmv-worker 變數 | `KMV_DB_PASSWORD`、`DATABASE_URL=mysql://kmv:${{KMV_DB_PASSWORD}}@${{MySQL.RAILWAY_PRIVATE_DOMAIN}}:3306/kmv_esg`、`TZ=Asia/Taipei` |
-| 建置／重啟 | `railway.json`：Dockerfile 建置、`restartPolicyType: ALWAYS` |
+| 建置／重啟 | 直接設在 Railway 服務 Settings：Dockerfile Path `Dockerfile`、Restart Policy `Always`（不使用 railway.json，Railway 已淘汰該設定方式） |
 
 程式依 `DATABASE_URL` 的開頭自動選擇：`mysql://` → `MySQLWriter`（PyMySQL、`sql/schema_mysql.sql`）；`postgresql://` → 原本的 `PostgresWriter`。
 

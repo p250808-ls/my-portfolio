@@ -137,7 +137,7 @@ flowchart LR
 ├── sql/schema_mysql.sql      ← 資料表定義（MySQL，使用中）
 ├── sql/schema.sql            ← 資料表定義（PostgreSQL 版）
 ├── analyze.py / backtest.py / calibrate.py ← 分析、回測、校準工具
-├── Dockerfile / railway.json ← Railway 建置設定
+├── Dockerfile               ← Railway 建置（python main.py）
 └── requirements.txt
 ```
 
